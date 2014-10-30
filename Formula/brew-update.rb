@@ -5,6 +5,9 @@ class BrewUpdate < Formula
 
   skip_clean 'bin'
 
+  depends_on "terminal-notifier"
+
+
   def install
     bin.install 'homebrewupdate'
   end
@@ -45,5 +48,4 @@ class BrewUpdate < Formula
     </plist>
     EOS
   end
-
 end
