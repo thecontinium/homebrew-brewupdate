@@ -1,8 +1,8 @@
 outlook
 
 class BrewUpdate < Formula
-  homepage 'https://github.com/thecontinium/homebrew-update/'
-  url 'https://github.com/thecontinium/homebrew-update.git'
+  homepage 'https://github.com/thecontinium/homebrew-brewupdate/'
+  url 'https://github.com/thecontinium/homebrew-brewupdate.git'
   version '0.0.1'
 
   skip_clean 'bin'
