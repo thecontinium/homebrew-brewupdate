@@ -1,5 +1,6 @@
 # homebrewupdate
 
+
 export PATH=/usr/local/bin:$PATH
 notifier=terminal-notifier
 
@@ -16,5 +17,7 @@ if [ ! -z "$outdated" ]; then
 		-message "$outdated" \
 		-activate com.apple.Terminal > /dev/null 2>&1
 
-  echo $(hostname) : "$outdated" | mail -s "Homebrew Updates Available" user@@gmail.com
+    if [ ! -z $1 ]; then
+      echo $(hostname) : "$outdated" | mail -s "Homebrew Updates Available" $1
+    fi
 fi
