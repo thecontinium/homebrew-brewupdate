@@ -26,9 +26,9 @@ class BrewUpdate < Formula
 		    <string>/usr/local/bin/homebrewupdate</string>
 	    </array>
 	    <key>StandardErrorPath</key>
-	    <string>/dev/null</string>
-	    <key>StandardOutPath</key>
-	    <string>/dev/null</string>
+      <string>/tmp/#{plist_name}.err</string>
+      <key>StandardOutPath</key>
+      <string>/tmp/#{plist_name}.out</string>
 	    <key>StartCalendarInterval</key>
 	    <array>
 		    <dict>
