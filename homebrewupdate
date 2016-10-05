@@ -18,7 +18,7 @@ if [ ! -z "$outdated" ]; then
     upgrade=`brew upgrade 2>&1`
     echo $(hostname) : "$outdated" : "$upgrade" > /tmp/upgrade 2>&1
     if [ ! -z $1 ]; then
-      echo $(hostname) : "$outdated" : "$updrade" | mail -s "Homebrew Upgrades Done" $1
+      echo $(hostname) : "$outdated" : "$upgrade" | mail -s "Homebrew Upgrades Done" $1
     fi
   elif [ ! -z $1 ]; then
     echo $(hostname) : "$outdated" | mail -s "Homebrew Updates Available" $1
