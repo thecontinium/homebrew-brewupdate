@@ -12,13 +12,15 @@ brew update > /dev/null 2>&1
 outdated=`brew outdated | sort | tr '\n' ' '`
 
 if [ ! -z "$outdated" ]; then
-	$notifier \
-		-group my.mac.homebrewnotify \
-		-title "Homebrew Updates Available" \
-		-message "$outdated" \
-		-activate com.apple.Terminal > /dev/null 2>&1
+	reply=`$notifier -group my.mac.homebrewnotify -title "Homebrew Updates Available" -message "$outdated" -closeLabel Leave -actions Upgrade -activate com.apple.Terminal`
 
+  if [ "$reply" == "Upgrade" ]; then
+    upgrade=`brew upgrade`
+    echo $(hostname) : "$outdated" : "$upgrade" > /tmp/upgrade 2>&1
     if [ ! -z $1 ]; then
-      echo $(hostname) : "$outdated" | mail -s "Homebrew Updates Available" $1
+      echo $(hostname) : "$outdated" : "$updrade" | mail -s "Homebrew Upgrades Done" $1
     fi
+  elif [ ! -z $1 ]; then
+    echo $(hostname) : "$outdated" | mail -s "Homebrew Updates Available" $1
+  fi
 fi
