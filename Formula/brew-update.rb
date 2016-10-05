@@ -1,7 +1,7 @@
 class BrewUpdate < Formula
   homepage 'https://github.com/thecontinium/homebrew-brewupdate/'
   url 'https://github.com/thecontinium/homebrew-brewupdate.git'
-  version '0.0.8'
+  version '0.0.9'
 
   skip_clean 'bin'
 
