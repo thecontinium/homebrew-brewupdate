@@ -15,7 +15,7 @@ if [ ! -z "$outdated" ]; then
 	reply=`$notifier -group my.mac.homebrewnotify -title "Homebrew Updates Available" -message "$outdated" -closeLabel Leave -actions Upgrade -activate com.apple.Terminal`
 
   if [ "$reply" == "Upgrade" ]; then
-    upgrade=`brew upgrade`
+    upgrade=`brew upgrade 2>&1`
     echo $(hostname) : "$outdated" : "$upgrade" > /tmp/upgrade 2>&1
     if [ ! -z $1 ]; then
       echo $(hostname) : "$outdated" : "$updrade" | mail -s "Homebrew Upgrades Done" $1
