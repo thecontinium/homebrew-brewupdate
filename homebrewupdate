@@ -15,8 +15,12 @@ if [ ! -z "$outdated" ]; then
 	reply=`$notifier -group my.mac.homebrewnotify -title "Homebrew Outdated" -message "$outdated" -closeLabel Leave -actions Upgrade -activate com.apple.Terminal`
 
   if [ "$reply" == "Upgrade" ]; then
-    upgrade=`brew upgrade 2>&1`
-#    echo $(hostname) : "$outdated" : "$upgrade" > /tmp/upgrade 2>&1
+    upgrade=""
+    if [[ $outdated == *"macvim"* ]]; then
+      upgrade="Upgrading macvim "`brew uninstall macvim;brew install --HEAD --with-lua --with-cscope macvim;brew linkapps macvim`
+    fi
+    upgrade=$upgrade`brew upgrade 2>&1`
+    #echo $(hostname) : "$outdated" : "$upgrade" > /tmp/upgrade 2>&1
     if [ ! -z $1 ]; then
       echo $(hostname) : "$outdated" : "$upgrade" | mail -s "Homebrew Upgrade" $1
     fi
