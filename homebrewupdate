@@ -27,5 +27,5 @@ if [ ! -z "$outdated" ]; then
     echo $(hostname) : "$outdated" | mail -s "Homebrew Outdated" $1
   fi
 else
-  `$notifier -group my.mac.homebrewnotify -title "Homebrew" -message "All up to date" -timeout 5`
+  `$notifier -group my.mac.homebrewnotify -title "Homebrew" -message "All up to date" -timeout 10`
 fi
