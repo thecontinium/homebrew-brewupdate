@@ -12,15 +12,15 @@ outdated=`brew outdated | sort | tr '\n' ' '`
 
 if [ ! -z "$outdated" ]; then
     if [ ! -z $1 ]; then
-      echo $(hostname) : "$outdated" | mail -s "Homebrew Outdated" $1
+      echo $(hostname) : "$outdated" | mail -s "Homebrew Upgrading" $1
     fi
     upgrade=$upgrade`brew upgrade 2>&1`
     #echo $(hostname) : "$outdated" : "$upgrade" > /tmp/upgrade 2>&1
     if [ ! -z $1 ]; then
-      echo $(hostname) : "$upgrade" | mail -s "Homebrew Upgrade" $1
+      echo $(hostname) : "$upgrade" | mail -s "Homebrew Upgraded" $1
     fi
 else
     if [ ! -z $1 ]; then
-      echo $(hostname) : "Up to Date" | mail -s "Homebrew Up to Date" $1
+      echo $(hostname) | mail -s "Homebrew up to Date" $1
     fi
 fi
