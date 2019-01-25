@@ -3,7 +3,6 @@
 
 
 export PATH=/usr/local/bin:$PATH
-notifier=terminal-notifier
 
 # Give the network a chance to connect
 sleep 10
@@ -12,20 +11,16 @@ brew update > /dev/null 2>&1
 outdated=`brew outdated | sort | tr '\n' ' '`
 
 if [ ! -z "$outdated" ]; then
-  reply=`$notifier -group my.mac.homebrewnotify -title "Homebrew Outdated" -message "$outdated" -closeLabel Leave -actions Upgrade -json | jq -r .activationValue`
-  if [ "$reply" == "Upgrade" ]; then
-    upgrade=""
-    if [[ $outdated == *"macvim"* ]]; then
-      upgrade="Upgrading macvim "`brew uninstall macvim;brew install --HEAD --with-lua --with-cscope macvim;brew linkapps macvim`
+    if [ ! -z $1 ]; then
+      echo $(hostname) : "$outdated" | mail -s "Homebrew Outdated" $1
     fi
     upgrade=$upgrade`brew upgrade 2>&1`
     #echo $(hostname) : "$outdated" : "$upgrade" > /tmp/upgrade 2>&1
     if [ ! -z $1 ]; then
-      echo $(hostname) : "$outdated" : "$upgrade" | mail -s "Homebrew Upgrade" $1
+      echo $(hostname) : "$upgrade" | mail -s "Homebrew Upgrade" $1
     fi
-  elif [ ! -z $1 ]; then
-    echo $(hostname) : "$outdated" | mail -s "Homebrew Outdated" $1
-  fi
 else
-  `$notifier -group my.mac.homebrewnotify -title "Homebrew" -message "All up to date" -timeout 10`
+    if [ ! -z $1 ]; then
+      echo $(hostname) : "Up to Date" | mail -s "Homebrew Up to Date" $1
+    fi
 fi

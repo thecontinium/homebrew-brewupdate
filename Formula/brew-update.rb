@@ -1,12 +1,9 @@
 class BrewUpdate < Formula
   homepage 'https://github.com/thecontinium/homebrew-brewupdate/'
   url 'https://github.com/thecontinium/homebrew-brewupdate.git'
-  version '0.1.15'
+  version '0.1.16'
 
   skip_clean 'bin'
-
-  depends_on "terminal-notifier"
-  depends_on "jq"
 
 
   def install
