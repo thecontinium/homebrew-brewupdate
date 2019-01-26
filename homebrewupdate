@@ -1,8 +1,8 @@
 #!/bin/bash
 # homebrewupdate
 
-
 export PATH=/usr/local/bin:$PATH
+notifier=terminal-notifier
 
 # Give the network a chance to connect
 sleep 10
@@ -11,16 +11,19 @@ brew update > /dev/null 2>&1
 outdated=`brew outdated | sort | tr '\n' ' '`
 
 if [ ! -z "$outdated" ]; then
-    if [ ! -z $1 ]; then
-      echo $(hostname) : "$outdated" | mail -s "Homebrew Upgrading" $1
-    fi
-    upgrade=$upgrade`brew upgrade 2>&1`
+  `$notifier -group my.mac.homebrewnotify -title "Homebrew Upgrading" -message "$outdated"`
+  if [ ! -z $1 ]; then
+    echo $(hostname) : "$outdated" | mail -s "Homebrew Upgrading" $1
+  fi
+  upgrade=$upgrade`brew upgrade 2>&1`
+  `$notifier -group my.mac.homebrewnotify -title "Homebrew Upgraded" -message "$upgrade"`
     #echo $(hostname) : "$outdated" : "$upgrade" > /tmp/upgrade 2>&1
-    if [ ! -z $1 ]; then
-      echo $(hostname) : "$upgrade" | mail -s "Homebrew Upgraded" $1
-    fi
+  if [ ! -z $1 ]; then
+    echo $(hostname) : "$upgrade" | mail -s "Homebrew Upgraded" $1
+  fi
 else
-    if [ ! -z $1 ]; then
-      echo $(hostname) | mail -s "Homebrew up to Date" $1
-    fi
+  `$notifier -group my.mac.homebrewnotify -title "Homebrew" -message "All up to date" -timeout 10`
+  if [ ! -z $1 ]; then
+    echo $(hostname) | mail -s "Homebrew up to Date" $1
+  fi
 fi
