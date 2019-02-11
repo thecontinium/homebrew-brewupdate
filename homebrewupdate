@@ -16,7 +16,7 @@ if [ ! -z "$outdated" ]; then
     echo $(hostname) : "$outdated" | mail -s "Homebrew Upgrading" $1
   fi
   upgrade=$upgrade`brew upgrade 2>&1`
-  `$notifier -group my.mac.homebrewnotify -title "Homebrew Upgraded" -message "$upgrade"`
+  `$notifier -group my.mac.homebrewnotify -title "Homebrew Upgraded" -message "$outdated"`
     #echo $(hostname) : "$outdated" : "$upgrade" > /tmp/upgrade 2>&1
   if [ ! -z $1 ]; then
     echo $(hostname) : "$upgrade" | mail -s "Homebrew Upgraded" $1
